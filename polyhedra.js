@@ -39,7 +39,7 @@ void main() {
   nv_color += 1.-pow(nv.z,0.1);
 
   // apply brightness value
-  nv_color = mix(nv_color, ones, smoothstep(0.,1.,uBright));
+  nv_color = mix(nv_color, ones * 0.88, smoothstep(0.,1.,uBright));
 
   // apply opacity value
   fragColor.rgba = vec4(nv_color.xyz,uOpacity);
@@ -79,26 +79,15 @@ void main() {
 
 
 const vertexSphereShader = `
-varying vec3 view_normal_vector;
-
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-
-  // pass normal vector to fragment shader
-  view_normal_vector = normalMatrix * normalize(normal);
 }
 `;
 
 const fragmentSphereShader = `
-varying vec3 view_normal_vector;
 uniform float uOpacity;
 
 void main() {
-  vec3 nv = normalize(view_normal_vector);
-
-  // opacity fades to zero when normal faces camera
-  float opacity = uOpacity * (1.0-nv.z);
-
   gl_FragColor = vec4(.0,.9,1.,uOpacity);
 }
 `;
@@ -202,11 +191,11 @@ function main() {
     setScale(cube.solid, Math.pow(3,cubeFitOffset+scaleOffset+t2-0.5));
     setScale(cube.wire, Math.pow(3,cubeFitOffset+scaleOffset+t1));
     setScale(cube.glassy, Math.pow(3,cubeFitOffset+scaleOffset+t1));
-    setScale(cube.sphere, Math.pow(3,cubeFitOffset+scaleOffset+t1));
+    setScale(cube.sphere, 1.05*Math.pow(3,cubeFitOffset+scaleOffset+t1));
     setScale(octa.solid, Math.pow(3,scaleOffset+t1-1));
     setScale(octa.wire, Math.pow(3,scaleOffset+t2-0.5));
     setScale(octa.glassy, Math.pow(3,scaleOffset+t2-0.5));
-    setScale(octa.sphere, Math.pow(3,scaleOffset+t2-0.5));
+    setScale(octa.sphere, 1.05*Math.pow(3,scaleOffset+t2-0.5));
     
     state = t1 < 0.5;
     cube.solid.renderOrder = 1+2*state;
@@ -219,13 +208,13 @@ function main() {
     octa.sphere.renderOrder = 0;
     
     cube.solid.material.uniforms.uOpacity.value = Math.min(1,2-2*t2);
-    cube.solid.material.uniforms.uBright.value = Math.max(0.,1-2*t2);
+    cube.solid.material.uniforms.uBright.value = 1-2*t2;
     cube.sphere.material.uniforms.uOpacity.value = Math.min(t1*0.3,0.2-t1*0.25);
     cube.wire.material.opacity = Math.min(2*t1,2-2*t1);
     cube.glassy.material.uniforms.uOpacity.value = Math.min(t1,1-t1);
     
     octa.solid.material.uniforms.uOpacity.value = Math.min(1,2-2*t1);
-    octa.solid.material.uniforms.uBright.value = Math.max(0.,1-2*t1);
+    octa.solid.material.uniforms.uBright.value = 1-2*t1;
     octa.sphere.material.uniforms.uOpacity.value = Math.min(t2*0.3,0.2-t2*0.25);
     octa.wire.material.opacity = Math.min(2*t2,2-2*t2);
     octa.glassy.material.uniforms.uOpacity.value = Math.min(t2,1-t2);
@@ -236,10 +225,10 @@ function main() {
     }
     tDelay1 = Math.max(0, time - 2.5);
     tDelay2 = Math.max(0, time - 10);
-    tSlowStart1 = tDelay1 / (1 + 20./tDelay1 + tDelay1/5.);
-    tSlowStart2 = tDelay2 / (1 + 70/tDelay2);
-    rotator.rotation.x = -0.9553 + tSlowStart2 * 0.4;
-    rotator.rotation.y =  tSlowStart2 * 0.41;
+    tSlowStart1 = tDelay1 / (1 + 20/tDelay1 + tDelay1/5.);
+    tSlowStart2 = tDelay2 / (1 + 20/tDelay2);
+    rotator.rotation.x = -0.9553 + tSlowStart2 * 0.5;
+    rotator.rotation.y =  tSlowStart2 * 0.15;
     rotator.rotation.z = Math.PI/4 + tSlowStart2 * 0.1;
     camera.rotation.z = tSlowStart1;
 

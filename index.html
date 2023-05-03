@@ -8,40 +8,44 @@
         font-family: 'Monaco';
       }
       #text {
-        margin-top: 2em;
-        margin-left: 2em;
+        margin-top: 3rem;
+        margin-left: 3rem;
+        position: absolute;
+        font-size: 1.2em;
       }
       #name {
         display: block;
-        /* text-align: center; */
+        text-align: center;
         position: relative;
         font-family: 'Rosario';
         font-size: 3em;
         color: #ddd;
-        text-shadow: -1px 0 0 #a03, 1px 0 0 #0df;
-        /* text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff; */
+        text-shadow: -1px 0 0 #a03, 1px 0 0 #0df, 0 0 2px #0df, 0 0 6px #0df;
+        line-height: 0.9;
+        letter-spacing: 0.2em;
       }
       #details {
         display: block;
-        /* text-align: center; */
+        text-align: center;
+        font-family: 'Rosario';
         position: relative;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.2em;
         color: rgb(131,148,150);
       }
       #emph{
-        color: rgb(42,161,152);
+        color: rgb(38,139,210);
       }
       #emph2{
-        color: rgb(103,113,196);
+        color: rgb(133,153,0);
       }
       #center {
         padding: 0;
         margin: auto;
         display: block;
-        max-height: 360px;
-        height: 60%;
+        max-height: 480px;
+        height: 80%;
         /* min-height: 600px; */
-        max-width: 720px;
+        max-width: 960px;
         width: 80%;
         /* min-width: 240px; */
         position: absolute;
@@ -67,14 +71,16 @@
       #links {
         bottom: 0;
         left: 0;
-        margin-left: 2em;
-        margin-bottom: 2em;
+        margin-left: 3rem;
+        margin-bottom: 3rem;
         position: absolute;
         letter-spacing: 0.3em;
         color: rgb(131,148,150);
       }
       a {
-        color: rgb(133,153,0);
+        color: #ddd;
+        text-shadow: -1px 0 0 #a03, 1px 0 0 #0df;
+        letter-spacing: 0.3em;
       }
     </style>
     <script type="module">
@@ -91,15 +97,14 @@
       <div id="text">
         <span id="name">SEAN WIIG<br></span>
         <span id="details">
-          -<span id="emph2">computer programmer</span>-<br><br><br><br>
+          -=<span id="emph2">computer programmer</span>=-<br><br><br><br>
         </span>
       </div>
       <div id="links">
-          
           {<br>
           &nbsp&nbsp<span id="emph">"email"</span>: <span id="emph">"seanwiig@gmail.com"</span>,<br>
-          &nbsp&nbsp<span id="emph">"phone"</span>: <span id="emph">"(470) 952-2754"</span>,<br>}
-          <br>
+          &nbsp&nbsp<span id="emph">"phone"</span>: <span id="emph">"just email me"</span>,<br>}
+          <br><br>
         >>> <a href="http://www.github.com/seanwiig">www.github.com/seanwiig</a>
       </div>
     </div>
